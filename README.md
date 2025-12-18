@@ -196,6 +196,17 @@ Arquivo: `test/rest/external/k6/cadastroDeAluno.test.js`
 
 ---
 
+## Exemplo de relatório 
+
+Para executar os testes gerando relatório, utilize o comando abaixo: 
+
+```node
+K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_PERIOD=2s K6_WEB_DASHBOARD_EXPORT=html-report.html k6 run "test\rest\external\k6\cadastroDeAluno.test.js"
+```
+
+<img width="1920" height="2077" alt="image" src="https://github.com/user-attachments/assets/ad090e17-eee3-40db-9bd0-a00c7ebfd140" />
+
+
 ### Conclusão
 
 A estrutura dos testes K6 neste projeto foi desenhada para ser modular, reutilizável e fácil de manter, aplicando boas práticas de automação de performance e cobrindo os principais conceitos da ferramenta.
