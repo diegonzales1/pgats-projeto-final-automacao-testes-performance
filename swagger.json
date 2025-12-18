@@ -1,0 +1,128 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Cadastro de Alunos",
+    "version": "1.0.0",
+    "description": "API REST para cadastro de alunos e cursos com autenticação JWT."
+  },
+  "paths": {
+    "/login": {
+      "post": {
+        "summary": "Login de usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Token JWT gerado" },
+          "400": { "description": "Erro de validação" }
+        }
+      }
+    },
+    "/alunos": {
+      "get": {
+        "summary": "Listar alunos",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Lista de alunos" }
+        }
+      },
+      "post": {
+        "summary": "Cadastrar aluno",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": { "type": "string" },
+                  "idade": { "type": "integer" },
+                  "telefone": { "type": "string" },
+                  "endereco": { "type": "string" }
+                },
+                "required": ["nome", "idade", "telefone", "endereco"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Aluno cadastrado" },
+          "400": { "description": "Erro de validação" }
+        }
+      }
+    },
+    "/alunos/{id}": {
+      "delete": {
+        "summary": "Exclusão lógica de aluno",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Aluno excluído logicamente" },
+          "400": { "description": "Erro de validação" }
+        }
+      }
+    },
+    "/cursos": {
+      "get": {
+        "summary": "Listar cursos",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Lista de cursos" }
+        }
+      },
+      "post": {
+        "summary": "Cadastrar curso",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": { "type": "string" },
+                  "cargaHoraria": { "type": "integer" },
+                  "horario": { "type": "string", "enum": ["manhã", "tarde", "noite"] }
+                },
+                "required": ["nome", "cargaHoraria", "horario"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Curso cadastrado" },
+          "400": { "description": "Erro de validação" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

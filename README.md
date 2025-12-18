@@ -1,94 +1,5 @@
 # API de Cadastro de Alunos
 
-## API GraphQL
-Além da API REST, este projeto expõe os serviços de Aluno, Curso e Autenticação via GraphQL usando ApolloServer e Express.
-
-### Como executar a API GraphQL
-1. Acesse a pasta `graphql`:
-  ```bash
-  cd graphql
-  ```
-2. Instale as dependências (se ainda não instalou no projeto raiz):
-  ```bash
-  npm install
-  ```
-3. Para rodar o servidor GraphQL:
-  ```bash
-  node server.js
-  ```
-4. Para rodar apenas o app (para testes):
-  ```bash
-  node app.js
-  ```
-
-### Autenticação nas Mutations
-Obtenha o JWT via login REST e envie no header `Authorization: Bearer <token>` nas Mutations protegidas.
-
-### Documentação GraphQL
-O endpoint GraphQL estará disponível em `/graphql` (porta 4000 por padrão).
-Consulte o playground do ApolloServer para explorar o schema.
-
-
-## Descrição
-API REST para cadastro de alunos e cursos, com autenticação JWT e controle de permissões por roles (coordenador e diretor). Utiliza banco de dados em memória e documentação via Swagger.
-
-## Instalação
-
-1. Clone o repositório ou baixe os arquivos.
-2. Instale as dependências:
-   ```bash
-   npm install
-   ```
-
-## Executando a API
-
-```bash
-node server.js
-```
-
-A API estará disponível em `http://localhost:3000`.
-
-
-## Documentação Swagger
-Acesse a documentação interativa REST em:
-```
-http://localhost:3000/api-docs
-```
-E a documentação GraphQL em:
-```
-http://localhost:4000/graphql
-```
-
-## Usuários de Teste
-- **Coordenador:**
-  - usuário: `coordenador`
-  - senha: `1234`
-- **Diretor:**
-  - usuário: `diretor`
-  - senha: `1234`
-
-## Endpoints Principais
-
-- `POST /login` — Autenticação e obtenção do token JWT
-- `GET /alunos` — Listar alunos (autenticado)
-- `POST /alunos` — Cadastrar aluno (coordenador/diretor)
-- `DELETE /alunos/:id` — Exclusão lógica de aluno (diretor)
-- `GET /cursos` — Listar cursos (autenticado)
-- `POST /cursos` — Cadastrar curso (coordenador/diretor)
-
-## Regras de Negócio
-- Login e senha obrigatórios para autenticação
-- Todos os campos de cadastro são obrigatórios
-- Não pode cadastrar curso com mesmo nome e horário
-- Exclusão lógica de aluno exige id existente
-
-## Testes
-Para rodar os testes (após implementar):
-```bash
-npm test
-```
-
-
 ## Estrutura dos Testes de Performance com K6
 
 Este projeto utiliza o K6 para automação de testes de performance, organizando scripts, helpers e dados em uma estrutura modular e reutilizável. A seguir, explicamos os principais conceitos aplicados nos testes, com exemplos reais do código.
@@ -288,4 +199,100 @@ Arquivo: `test/rest/external/k6/cadastroDeAluno.test.js`
 ### Conclusão
 
 A estrutura dos testes K6 neste projeto foi desenhada para ser modular, reutilizável e fácil de manter, aplicando boas práticas de automação de performance e cobrindo os principais conceitos da ferramenta.
+
+## API GraphQL
+Além da API REST, este projeto expõe os serviços de Aluno, Curso e Autenticação via GraphQL usando ApolloServer e Express.
+
+### Como executar a API GraphQL
+1. Acesse a pasta `graphql`:
+  ```bash
+  cd graphql
+  ```
+2. Instale as dependências (se ainda não instalou no projeto raiz):
+  ```bash
+  npm install
+  ```
+3. Para rodar o servidor GraphQL:
+  ```bash
+  node server.js
+  ```
+4. Para rodar apenas o app (para testes):
+  ```bash
+  node app.js
+  ```
+
+### Autenticação nas Mutations
+Obtenha o JWT via login REST e envie no header `Authorization: Bearer <token>` nas Mutations protegidas.
+
+### Documentação GraphQL
+O endpoint GraphQL estará disponível em `/graphql` (porta 4000 por padrão).
+Consulte o playground do ApolloServer para explorar o schema.
+
+
+## Descrição
+API REST para cadastro de alunos e cursos, com autenticação JWT e controle de permissões por roles (coordenador e diretor). Utiliza banco de dados em memória e documentação via Swagger.
+
+## Instalação
+
+1. Clone o repositório ou baixe os arquivos.
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+
+## Executando a API
+
+```bash
+node server.js
+```
+
+A API estará disponível em `http://localhost:3000`.
+
+
+## Documentação Swagger
+Acesse a documentação interativa REST em:
+```
+http://localhost:3000/api-docs
+```
+E a documentação GraphQL em:
+```
+http://localhost:4000/graphql
+```
+
+## Usuários de Teste
+- **Coordenador:**
+  - usuário: `coordenador`
+  - senha: `1234`
+- **Diretor:**
+  - usuário: `diretor`
+  - senha: `1234`
+
+## Endpoints Principais
+
+- `POST /login` — Autenticação e obtenção do token JWT
+- `GET /alunos` — Listar alunos (autenticado)
+- `POST /alunos` — Cadastrar aluno (coordenador/diretor)
+- `DELETE /alunos/:id` — Exclusão lógica de aluno (diretor)
+- `GET /cursos` — Listar cursos (autenticado)
+- `POST /cursos` — Cadastrar curso (coordenador/diretor)
+
+## Regras de Negócio
+- Login e senha obrigatórios para autenticação
+- Todos os campos de cadastro são obrigatórios
+- Não pode cadastrar curso com mesmo nome e horário
+- Exclusão lógica de aluno exige id existente
+
+## Testes
+Para rodar os testes (após implementar):
+```bash
+npm test
+```
+
+## Testes de Performance 
+Para rodas os testes de performance:
+
+```bash
+k6 run "test\rest\external\k6\cadastroDeAluno.test.js"
+```
+
 # pgats-projeto-final-automacao-testes-performance
